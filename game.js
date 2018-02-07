@@ -1,3 +1,12 @@
+const items = require("./items.js");
+const readline = require("readline");
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+
 class Game {
   constructor(){
   }
@@ -8,7 +17,20 @@ class Game {
     console.log(" ");
     console.log("\x1b[35m", "  Move in cardinal directions (i.e. 'east') and interact with the things you encounter.");
     console.log(" ");
-    console.log("\x1b[32m", "You are in an open field on the west side of a white house with a boarded front door.");
+    rl.question('You are in a hallway. There is a door at the end of the hallway.', (answer) => {
+      console.log(`${answer}`);
+      this.switchboard(answer);
+      rl.close();
+    });
+  }
+
+  switchboard(command){
+    switch (command) {
+      case 'door':
+        Door.openDoor();
+      default:
+        console.log("Not a command, babe.");
+    }
   }
 }
 
